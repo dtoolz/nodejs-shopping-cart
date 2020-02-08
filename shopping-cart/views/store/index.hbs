@@ -1,18 +1,25 @@
-<div class="container mt-5">
+{{# each products }}
+  <div class="container mt-5">
     <div class="row">
-        <div class="col-md-3 box-shadow1">
+        {{# each this}}
+           <div class="col-md-3 box-shadow1">
             <div class="card">
-                <img src="images/shoe5.jpg" class="card-img-top">
+                <img src="{{ this.imagePath }}" class="card-img-top">
                 <div class="card-body">
-                    <h5>Yellow Nike classic shoe</h5>
-                    <h5>$33.95</h5>
+                    <h5>{{this.title}}</h5>
+                    <h5>${{this.price}}</h5>
                     <button class="btn btn-info"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add to
                         cart
                     </button>
                 </div>
             </div>
         </div>
+        {{/each}}
+    </div>
+    {{/each}}
 
+
+<!--
         <div class="col-md-3 box-shadow1">
             <div class="card">
                 <img src="images/shoe6.jpg" class="card-img-top">
@@ -57,7 +64,11 @@
 
  </div>
 
+-->
+
+
 <!--FEMALE SHOE SECTION-->
+<!--
  <div class="container mt-5">
     <div class="row">
         <div class="col-md-3 box-shadow1">
@@ -116,3 +127,4 @@
 
 
  </div>
+ -->
