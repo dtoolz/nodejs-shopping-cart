@@ -33,7 +33,7 @@ passport.use('local.signup', new LocalStrategy({
          return done(err);
      }
      if(user){ // check for users on db
-         return done(null, false, {message:'This email already exists. '}) // no err, no object to send back and third arg of message
+         return done(null, false, {message:'This email already exists. '}) // no err, no object to send back or not successfull and third arg of message
      }
      var newUser = new User();
      newUser.email = email;
@@ -46,3 +46,35 @@ passport.use('local.signup', new LocalStrategy({
      });
    });
 }) );
+
+//sign in strategy
+passport.use('local.signin', new LocalStrategy({
+   usernameField : 'email',
+   passwordField : 'password',
+   passReqToCallback : true
+}, function(req, email, password, done){//a little validation before checking the db for saved users
+    req.checkBody('email','Invalid email address').notEmpty().isEmail();
+    req.checkBody('password','Invalid Password').notEmpty();
+    var errors = req.validationErrors();
+     if(errors){
+         messages = [];
+         errors.forEach(function(error){
+           messages.push(error.msg); //msg from express-validator package
+         });
+         return done(null, false, req.flash('error', messages));
+     }
+    //finding the user in the db code as before
+    User.findOne({'email': email }, function(err, user){
+        if(err){// check for errors
+            return done(err);
+        }
+        if(!user){ // check for users on db
+            return done(null, false, {message:'User does not exist, please sign up.'}) // no err, no object to send back or not successfull and third arg of message
+        }
+        if(!user.validPassword(password)){ //validPassword from user.js models
+           return done(null, false, {message:'Incorrect Password.'});
+        }
+        //if no err, user found and correct password
+        return done(null, user);
+      });
+}));

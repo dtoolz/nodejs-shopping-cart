@@ -37,4 +37,17 @@ router.get('/user/profile', function(req,res,next){
    res.render('user/profile');
 });
 
+router.get('/user/signin', (req,res,next)=>{
+  var messages = req.flash('error'); // to display error messages from passportjs
+   res.render('user/signin', {csrfToken : req.csrfToken(), messages:messages, hasErrors: messages.length > 0 });
+});
+
+//post req from signin page
+router.post('/user/signin', passport.authenticate('local.signin', { // local.signin strategy from passport.js file
+  successRedirect : '/user/profile',
+  failureRedirect : '/user/signin',
+  failureFlash : true
+})); 
+
+
 module.exports = router;
