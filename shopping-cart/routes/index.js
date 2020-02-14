@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
 
 //get signup page
 router.get('/user/signup', function(req,res,next){
-      res.render('user/signup', {csrfToken : req.csrfToken()});
+      var messages = req.flash('error'); // to display error messages from passportjs
+      res.render('user/signup', {csrfToken : req.csrfToken(), messages:messages, hasErrors: messages.length > 0 });
 });
 
 //make post from signup page

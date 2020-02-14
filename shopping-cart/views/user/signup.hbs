@@ -1,6 +1,13 @@
 <div class="row">
     <form class="ml-3" action="/user/signup" method="post">
         <h1>Sign Up</h1>
+        {{#if hasErrors }}
+          <div class="alert alert-danger">
+              {{# each messages }}
+                 <p>{{this}}</p>
+              {{/each}}
+          </div>
+        {{/if}}
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Email</label>

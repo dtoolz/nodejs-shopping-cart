@@ -17,7 +17,17 @@ passport.use('local.signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
-}, function(req, email, password, done){
+}, function(req, email, password, done){ //checking for validation
+    req.checkBody('email','Invalid email address').notEmpty().isEmail();
+    req.checkBody('password','Password should have a minimum of 8 characters').notEmpty().isLength({min:8});
+    var errors = req.validationErrors();
+     if(errors){
+         messages = [];
+         errors.forEach(function(error){
+           messages.push(error.msg); //msg from express-validator package
+         });
+         return done(null, false, req.flash('error', messages));
+     }
    User.findOne({'email': email }, function(err, user){
      if(err){// check for errors
          return done(err);
