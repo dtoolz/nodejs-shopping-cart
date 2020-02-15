@@ -13,7 +13,7 @@ var validator = require('express-validator');
 
 
 var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users'); file deleted
+var userRouter = require('./routes/userRoutes'); 
 
 var app = express();
 
@@ -38,8 +38,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-//app.use('/users', usersRouter); file deleted
+app.use((req, res, next)=>{
+   res.locals.login = req.isAuthenticated(); //login global varaiable to check auth status even in the UI
+   next();
+});
+
+app.use('/user', userRouter); //prefix of 'user' to direct to userRouter
+app.use('/', indexRouter); //default route
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
