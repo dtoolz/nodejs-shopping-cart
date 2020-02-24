@@ -40,9 +40,17 @@ router.get('/shopping-cart/', (req, res, next)=>{
       return res.render('store/cart', {products : null});
     }
     var cart = new Cart(req.session.cart); //creating a new cart of the products stored in session
-    res.render('store/cart', { products: cart.generateArray(), totalPrice : cart.totalPrice });
+    res.render('store/cart', { products: cart.generateArray(), totalPrice : cart.totalPrice });//passing object that will be available in carthbs UI
 });
 
+//cart payment route
+router.get('/checkout', (req, res, next)=>{
+    if(!req.session.cart){
+      return res.redirect('/shopping-cart');//redirect to shopping-cart url
+    }
+    var cart = new Cart(req.session.cart);
+    res.render('store/payment', { totalPrice : cart.totalPrice} )
+});
 
 
 module.exports = router;

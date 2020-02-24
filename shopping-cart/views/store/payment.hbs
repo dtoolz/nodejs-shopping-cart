@@ -1,0 +1,44 @@
+<div class="row">
+    <form class="ml-3" action="/checkout" method="post" id="payment-form">
+        <h1 class="text-capitalize"> make payment here</h1>
+        <h5 class="text-capitalize">please, fill in valid card information.</h5>
+        <h6>Your Total : ${{totalPrice}} </h6>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="name" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="address">Address</label>
+                <input type="text" name="address" class="form-control" id="address" placeholder="address" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="card-name">Card Holder Name</label>
+                <input type="text" name="card-name" class="form-control" id="card-name" placeholder="card holder name"
+                    required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="card-number">Credit Card Number</label>
+                <input type="text" name="card-number" class="form-control" id="card-number"
+                    placeholder="credit card number" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="card-expiry-month">Card Expiry month</label>
+                <input type="text" name="card-expiry-month" class="form-control" id="card-expiry-month"
+                    placeholder="card expiry month" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="card-expiry-year">Card Expiry Year</label>
+                <input type="text" name="card-expiry-year" class="form-control" id="card-expiry-year"
+                    placeholder="card expiry year" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="card-cvc">CVC</label>
+                <input type="text" name="cvc" class="form-control" id="card-cvc"
+                    placeholder="cvc" required>
+            </div>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <a type="submit" class="btn btn-success">Make Payment</a>
+    </form>
+</div>
