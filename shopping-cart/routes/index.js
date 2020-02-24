@@ -34,6 +34,15 @@ router.get('/add-to-cart/:id', function(req, res, next){
    });
   });
 
+//cart view route
+router.get('/shopping-cart/', (req, res, next)=>{
+    if(!req.session.cart){ //if session do not exist, return null for products
+      return res.render('store/cart', {products : null});
+    }
+    var cart = new Cart(req.session.cart); //creating a new cart of the products stored in session
+    res.render('store/cart', { products: cart.generateArray(), totalPrice : cart.totalPrice });
+});
+
 
 
 module.exports = router;

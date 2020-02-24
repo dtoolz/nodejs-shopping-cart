@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next)=>{
    res.locals.login = req.isAuthenticated(); //login global varaiable to make auth status available in the UI
-   res.locals.session = req.session;
+   res.locals.session = req.session; //also for session
    next();
 });
 

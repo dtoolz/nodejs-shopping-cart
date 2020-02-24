@@ -11,3 +11,8 @@ a {
 .thumbnail img {
   max-height: 100px !important;
 }
+
+.ps-imgfit img {
+     width: 5rem;
+     height: 5rem;
+}

@@ -1,0 +1,72 @@
+<div class="container-fluid text-center display-none d-lg-block">
+    <div class="row">
+        <div class="col-10 mx-auto col-lg-2">
+            <p class="text-uppercase">products</p>
+        </div>
+        <div class="col-10 mx-auto col-lg-2">
+            <p class="text-uppercase">name of product</p>
+        </div>
+        <div class="col-10 mx-auto col-lg-2">
+            <p class="text-uppercase">unit price</p>
+        </div>
+        <div class="col-10 mx-auto col-lg-2">
+            <p class="text-uppercase">quantity</p>
+        </div>
+        <div class="col-10 mx-auto col-lg-2">
+            <p class="text-uppercase">remove</p>
+        </div>
+        <div class="col-10 mx-auto col-lg-2">
+            <p class="text-uppercase">unit price * qty</p>
+        </div>
+    </div>
+
+</div>
+
+{{# if products}}
+{{# each products }}
+<div class="container-fluid">
+    <div class="row my-2 text-capitalize text-center">
+        <div class="col-10 mx-auto col-lg-2">
+            <img src="{{ this.item.imagePath}}" class="ps-imgfit img-fluid" alt="product" />
+        </div>
+
+        <div class="col-10 mx-auto mt-5 col-lg-2">
+            {{ this.item.title }}
+        </div>
+
+        <div class="col-10 mx-auto mt-5 col-lg-2">
+            ${{ this.item.price }}
+        </div>
+
+        <div class="col-10 mx-auto col-lg-2 my-lg-0">
+            <div class="d-flex justify-content-center">
+                <div class="mt-5">
+                    <span class="btn btn-black mx-1">-</span>
+                    <span class="btn btn-black mx-1">{{ this.qty }}</span>
+                    <span class="btn btn-black mx-1">+</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-10 mx-auto col-lg-2">
+            <div class="cart-icon mt-5">
+                <i class="fa fa-trash text-warning"></i>
+            </div>
+        </div>
+
+        <div class="col-10 mx-auto mt-5 col-lg-2">
+            <strong> ${{ this.price }} </strong>
+        </div>
+    </div>
+</div>
+{{/each}}
+  <div class="container-fluid text-center">
+      <strong>
+        <p class="mt-2 text-capitalize">total : ${{totalPrice}}</p>
+      </strong>
+  </div>
+{{else}}
+<div class="container-fluid text-center">
+    <p class="text-uppercase">no item in the cart</p>
+</div>
+{{/if}}
